@@ -1,5 +1,5 @@
-import {expect, test} from '@playwright/test';
-import {LoginPage} from "../pages/loginPage";
+import { test } from '@playwright/test';
+import { BaseSteps } from '../steplib/baseSteps';
 
 // let context;
 // let page;
@@ -20,13 +20,9 @@ test.afterAll(async ({page}) => {
 });*/
 
 test.describe('My Test Suite', async () => {
-    test('Login Test', async ({page}) => {
-        const loginPage: LoginPage = new LoginPage(page);
-        await loginPage.openLoginPage("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-        await loginPage.login("Admin", "admin123");
-
-        expect(page.waitForURL('https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index'));
-
-        await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
+    test('Login Test', async ({ page }) => {
+        const loginPageSteps = await new BaseSteps(page).openLoginPage();
+        await loginPageSteps.login();
+        await loginPageSteps.verifyLogin();
     });
 });

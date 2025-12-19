@@ -20,7 +20,7 @@ test.afterAll(async ({page}) => {
 });*/
 
 test.describe('My Test Suite', async () => {
-    test('Login Test', async ({ page }) => {
+    test('Login Test @smoke', async ({ page }) => {
         const loginPageSteps = await new BaseSteps(page).openLoginPage();
         await loginPageSteps.login();
         await loginPageSteps.verifyLogin();

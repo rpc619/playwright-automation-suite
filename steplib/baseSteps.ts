@@ -1,4 +1,4 @@
-import {Page} from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 import { LoginPageSteps } from "./loginPageSteps";
 
 export class BaseSteps {
@@ -10,6 +10,7 @@ export class BaseSteps {
 
     async openLoginPage(): Promise<LoginPageSteps> {
         await this.page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        expect(this.page.getByRole('button', { name: 'Login' })).toBeVisible();
         return new LoginPageSteps(this.page);
     }
 }
